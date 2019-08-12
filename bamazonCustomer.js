@@ -20,7 +20,6 @@ connection.connect(function (err) {
     readProducts();
 });
 
-
 function updateQuantity(itemId, quantity, howMany, price) {
     newQuantity = quantity-howMany;
     var query = connection.query(
@@ -36,34 +35,12 @@ function updateQuantity(itemId, quantity, howMany, price) {
         function (err, res) {
             if (err) throw err;
             console.log(res.affectedRows + " Product(s) Ordered!\n");
-            console.log("Your purchase total is:  " + quantity * price);
+            console.log("Your purchase total is:  $" + quantity * price);
         }
     );
 
     connection.end();
 }
-
-
-function getQuantity(id) {
-    var myQuantity = 0;
-    connection.query("SELECT item_id, stock_quantity FROM products", function (err, res) {
-        if (err) throw err;
-        // Log all results of the SELECT statement
-        res.forEach(function (product) {
-            if (product.item_id == id) {
-                console.log(product.item_id);
-                myQuantity = product.stock_quantity;
-                console.log("myQuantity is:  " + product.stock_quantity)
-            }
-        })
-        connection.end();
-        console.log("Now myQuantity is:  " + myQuantity);
-        return myQuantity;
-    });
-    console.log("Now myQuantity is:  " + myQuantity);
-
-}
-
 
 function readProducts() {
     console.log("Selecting all products...\n");
