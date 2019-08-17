@@ -46,15 +46,8 @@ function readProducts() {
     console.log("Selecting all products...\n");
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
-        // Log all results of the SELECT statement
-        //console.log(res);
         res.forEach(function (product) {
             console.log("Item Number: " + product.item_id + ", " + product.product_name + ", Price: $" + product.price + ",  Quantity: " + product.stock_quantity);
-            // item_id: 8,
-            // product_name: 'Chromebook',
-            // department_name: null,
-            // price: '200',
-            // stock_quantity: 2
         })
         console.log("============")
         getOrder();
